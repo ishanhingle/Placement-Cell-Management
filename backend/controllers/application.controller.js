@@ -1,6 +1,6 @@
 import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
-
+import { User } from "../models/user.model.js";
 export const applyJob = async (req, res) => {
     try {
         const userId = req.id;
@@ -117,6 +117,11 @@ export const updateStatus = async (req,res) => {
 
         // update the status
         application.status = status.toLowerCase();
+        if(status=='Accepted'){
+            const student= await User.findById(application.applicant);
+            student.profile.job=application.job;
+            await student.save();
+        }
         await application.save();
 
         return res.status(200).json({
