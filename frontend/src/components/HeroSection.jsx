@@ -18,21 +18,9 @@ const HeroSection = () => {
     return (
         <div className='text-center'>
             <div className='flex flex-col gap-5 my-10'>
-                <span className=' mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium'>No. 1 Job Hunt Website</span>
-                <h1 className='text-5xl font-bold'>Search, Apply & <br /> Get Your <span className='text-[#6A38C2]'>Dream Jobs</span></h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid aspernatur temporibus nihil tempora dolor!</p>
-                <div className='flex w-[40%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 mx-auto'>
-                    <input
-                        type="text"
-                        placeholder='Find your dream jobs'
-                        onChange={(e) => setQuery(e.target.value)}
-                        className='outline-none border-none w-full'
-
-                    />
-                    <Button onClick={searchJobHandler} className="rounded-r-full bg-[#6A38C2]">
-                        <Search className='h-5 w-5' />
-                    </Button>
-                </div>
+                <span className=' mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium'>Official Centralized Placement Portal of DAVV</span>
+                <h1 className='text-5xl font-bold'>Launch Your Career <br /> with  <span className='text-[#6A38C2]'>DAVV's Placement Cell.</span></h1>
+                <p className='mx-10'>The Centralized Placement Cell at DAVV is dedicated to guiding students towards successful career paths by connecting them with industry leaders, fostering skill development, and offering personalized career support. We collaborate with renowned companies to provide tailored opportunities that align with the academic and professional aspirations of our students. Beyond job placements, we focus on preparing students for real-world challenges through training programs, workshops, and one-on-one counseling. Our mission is not just to help students secure jobs but to build confident, well-rounded professionals ready to excel in their careers.</p>
             </div>
         </div>
     )
