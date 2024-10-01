@@ -44,12 +44,14 @@ const Navbar = () => {
                                 <>
                                     <li><Link to="/admin/companies">Companies</Link></li>
                                     <li><Link to="/admin/jobs">Jobs</Link></li>
+                                    <li><Link to="/admin/dashboard">Dashboard</Link></li>
                                 </>
                             ) : (
                                 <>
                                     <li><Link to="/">Home</Link></li>
                                     <li><Link to="/jobs">Jobs</Link></li>
                                     <li><Link to="/browse">Placement Drives</Link></li>
+                                    <li><Link to="/dashboard">Dashboard</Link></li>
                                 </>
                             )
                         }
