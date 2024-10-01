@@ -20,7 +20,7 @@ const Home = () => {
     <div>
       <Navbar />
       <HeroSection className="min-h-screen"/> 
-      <div className='h'><Footer /></div>
+      <Footer />
     </div>
   )
 }
