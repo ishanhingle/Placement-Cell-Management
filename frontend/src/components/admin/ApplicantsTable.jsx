@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { MoreHorizontal } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { APPLICATION_API_END_POINT } from '@/utils/constant';
 import axios from 'axios';
+import { downloadExcel } from "react-export-table-to-excel";
+import { Button } from '../ui/button';
 
 const shortlistingStatus = ["Accepted", "Rejected"];
+const header=["FullName","Email","Contact","Resume","Date","Status"];
 
 const ApplicantsTable = () => {
     const { applicants } = useSelector(store => store.application);
-
+    const body=applicants?.applications?.map(app=>([
+                                                    app?.applicant?.fullname,
+                                                    app?.applicant?.email,
+                                                    app?.applicant?.phoneNumber,
+                                                    app.applicant?.profile?.resume,
+                                                    app?.applicant.createdAt.split("T")[0],
+                                                    app?.status,
+                                                ]))
     const statusHandler = async (status, id) => {
         console.log('called');
         try {
@@ -25,10 +36,20 @@ const ApplicantsTable = () => {
             toast.error(error.response.data.message);
         }
     }
-
+    const tableRef = useRef(null);
+    function handleDownloadExcel() {
+        downloadExcel({
+          fileName: "Applicants",
+          sheet: "Applicants",
+          tablePayload: {
+            header,
+            body,
+          },
+        });
+      }
     return (
         <div>
-            <Table>
+            <Table ref={tableRef}>
                 <TableCaption>A list of your recent applied user</TableCaption>
                 <TableHeader>
                     <TableRow>
@@ -37,6 +58,7 @@ const ApplicantsTable = () => {
                         <TableHead>Contact</TableHead>
                         <TableHead>Resume</TableHead>
                         <TableHead>Date</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
@@ -53,6 +75,7 @@ const ApplicantsTable = () => {
                                     }
                                 </TableCell>
                                 <TableCell>{item?.applicant.createdAt.split("T")[0]}</TableCell>
+                                <TableCell>{item?.status}</TableCell>
                                 <TableCell className="float-right cursor-pointer">
                                     <Popover>
                                         <PopoverTrigger>
@@ -76,10 +99,9 @@ const ApplicantsTable = () => {
                             </tr>
                         ))
                     }
-
                 </TableBody>
-
             </Table>
+                <Button onClick={handleDownloadExcel}> Export excel </Button>
         </div>
     )
 }
