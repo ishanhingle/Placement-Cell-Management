@@ -7,12 +7,22 @@ import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
 import { APPLICATION_API_END_POINT } from '@/utils/constant';
 import axios from 'axios';
+import { downloadExcel } from "react-export-table-to-excel";
+import { Button } from '../ui/button';
 
 const shortlistingStatus = ["Accepted", "Rejected"];
-const h=["FullName","Email","Contact",	"Resume","Date","Status"]
+const header=["FullName","Email","Contact","Resume","Date","Status"];
 
 const ApplicantsTable = () => {
     const { applicants } = useSelector(store => store.application);
+    const body=applicants?.applications?.map(app=>([
+                                                    app?.applicant?.fullname,
+                                                    app?.applicant?.email,
+                                                    app?.applicant?.phoneNumber,
+                                                    app.applicant?.profile?.resume,
+                                                    app?.applicant.createdAt.split("T")[0],
+                                                    app?.status,
+                                                ]))
     const statusHandler = async (status, id) => {
         console.log('called');
         try {
@@ -27,6 +37,16 @@ const ApplicantsTable = () => {
         }
     }
     const tableRef = useRef(null);
+    function handleDownloadExcel() {
+        downloadExcel({
+          fileName: "Applicants",
+          sheet: "Applicants",
+          tablePayload: {
+            header,
+            body,
+          },
+        });
+      }
     return (
         <div>
             <Table ref={tableRef}>
@@ -81,18 +101,7 @@ const ApplicantsTable = () => {
                     }
                 </TableBody>
             </Table>
-            <DownloadTableExcel
-                filename="Applicants Table"
-                sheet="Applicants"
-                currentTableRef={tableRef.current}
-                tablePayload:{
-                    header:h,
-                }
-            >
-
-                <button> Export excel </button>
-
-            </DownloadTableExcel>
+                <Button onClick={handleDownloadExcel}> Export excel </Button>
         </div>
     )
 }
