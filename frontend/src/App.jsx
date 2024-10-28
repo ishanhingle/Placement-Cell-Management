@@ -15,8 +15,9 @@ import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import Dashboard from './components/Dashboard'
-
-
+import Notices from './components/Notices'
+import AdminNotices from './components/admin/AdminNotices'
+import AddNotice from './components/admin/AddNotice'
 const appRouter = createBrowserRouter([
   {
     path: '/',
@@ -45,6 +46,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />
+  },
+  {
+    path: "/notices",
+    element: <Notices/>
   },
   {
     path: "/dashboard",
@@ -78,6 +83,14 @@ const appRouter = createBrowserRouter([
   {
     path:"/admin/dashboard",
     element: <Dashboard/>
+  },
+  {
+    path:"/admin/notices",
+    element: <AdminNotices/>
+  },
+  {
+    path:"/admin/notices/addNotice",
+    element: <AddNotice/>
   },
 
 ])

@@ -34,7 +34,7 @@ const Navbar = () => {
         <div className='bg-white'>
             <div className='flex items-center justify-between mx-auto max-w-7xl h-16'>
                 <div className='flex flex-row m-4'>
-                    <img src="images.jpeg" className='h-10 w-10 '/>
+                    <img src={images} className='h-10 w-10 '/>
                     <h1 className='text-2xl font-bold'>CPC<span className='text-[#F83002]'>DAVV</span></h1>
                 </div>
                 <div className='flex items-center gap-12'>
@@ -45,6 +45,7 @@ const Navbar = () => {
                                     <li><Link to="/admin/companies">Companies</Link></li>
                                     <li><Link to="/admin/jobs">Jobs</Link></li>
                                     <li><Link to="/admin/dashboard">Dashboard</Link></li>
+                                    <li><Link to="/admin/notices">Notices</Link></li>
                                 </>
                             ) : (
                                 <>
@@ -52,6 +53,7 @@ const Navbar = () => {
                                     <li><Link to="/jobs">Jobs</Link></li>
                                     <li><Link to="/browse">Placement Drives</Link></li>
                                     <li><Link to="/dashboard">Dashboard</Link></li>
+                                    <li><Link to="/notices">Notices</Link></li>
                                 </>
                             )
                         }
