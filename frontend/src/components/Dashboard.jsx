@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Navbar from './shared/Navbar';
+import { USER_API_END_POINT } from '@/utils/constant';
 
 const Dashboard = () => {
   const [stats, setStats] = useState(null);
@@ -10,7 +11,7 @@ const Dashboard = () => {
     // Fetch data using axios
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/v1/user/dashboard');
+        const response = await axios.get(USER_API_END_POINT+'/dashboard');
         setStats(response.data);  // Store the fetched data
       } catch (err) {
         setError('Failed to fetch data');
