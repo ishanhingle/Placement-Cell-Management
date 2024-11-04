@@ -181,13 +181,13 @@ const highestAndAverage=async()=>{
             select: 'salary', // Only select the salary field from the Job model
           })
           .exec();
-    
+        console.log(studentsWithJobs[0].profile.job);
         let highestPackage =0;
         let totalSalary = 0;
         let numberOfStudentsWithJobs = studentsWithJobs.length;
     
         studentsWithJobs.forEach(student => {
-          const salary = student.profile.job.salary;
+          const salary = student?.profile?.job?.salary || 0;
           totalSalary += salary;
           if (salary > highestPackage) {
             highestPackage = salary;

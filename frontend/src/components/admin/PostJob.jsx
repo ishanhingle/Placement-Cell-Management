@@ -125,26 +125,6 @@ const PostJob = () => {
                                 className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
                             />
                         </div>
-                        <div>
-                            <Label>Experience Level</Label>
-                            <Input
-                                type="text"
-                                name="experience"
-                                value={input.experience}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
-                        </div>
-                        <div>
-                            <Label>No of Postion</Label>
-                            <Input
-                                type="number"
-                                name="position"
-                                value={input.position}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
-                        </div>
                         {
                             companies.length > 0 && (
                                 <Select onValueChange={selectChangeHandler}>
