@@ -9,7 +9,9 @@ function AdminNotices() {
   return (
     <div>
         <Navbar/>
+        <div className='p-10'>
         <Button><Link to={'addNotice'}>Add a New Notice</Link></Button>
+        </div>
         <AllNotices/>
     </div>
   )

@@ -1,6 +1,37 @@
 import { Notice } from "../models/notice.model.js";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+import nodemailer from 'nodemailer'
+import { User } from "../models/user.model.js";
+
+const sendEmail=async ()=>{
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'ishanproject.iet@gmail.com',
+          pass: 'zlfnviwvciaspoax'
+        }
+      });
+      User.find().then((users)=>{
+        users.forEach(user => {
+            var mailOptions = {
+                from: 'ishanproject.iet@gmai.com',
+                to: user.email,
+                subject: 'Notice Board Updated',
+                text: 'Hey Kindly Check the Notice Board'
+              };
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            })
+            });
+      });
+      
+}
+
 export const createNotice=async (req,res)=>{
     try {
         const {content}=req.body
@@ -26,6 +57,7 @@ export const createNotice=async (req,res)=>{
             content,
             files,
         })
+        await sendEmail();
         res.status(200).json({
             success:true,
             message:"notice created successfully"
